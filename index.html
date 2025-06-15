@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Packet Tracer Files</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .tabs { display: flex; cursor: pointer; margin-bottom: 10px; }
+  .tab {
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    margin-right: 5px;
+    border-radius: 4px 4px 0 0;
+    background: #eee;
+  }
+  .tab.active {
+    background: white;
+    border-bottom: 1px solid white;
+  }
+  .content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 0 4px 4px 4px;
+    background: white;
+  }
+  a {
+    color: blue;
+    text-decoration: none;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<h1>My Packet Tracer Files</h1>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="content" id="content">Select a file to download</div>
+
+<script>
+  // List your pkt files here
+  const files = [
+    "file1.pkt",
+    "file2.pkt",
+    "file3.pkt"
+  ];
+
+  const tabsContainer = document.getElementById('tabs');
+  const content = document.getElementById('content');
+
+  files.forEach((file, index) => {
+    const tab = document.createElement('div');
+    tab.className = 'tab';
+    tab.innerText = `${index + 1}. ${file}`;
+    tab.onclick = () => {
+      // Remove active class from all tabs
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      // Show download link for the file
+      content.innerHTML = `<p>Download <strong>${file}</strong>: <a href="${file}" download>Click here</a></p>`;
+    };
+    tabsContainer.appendChild(tab);
+  });
+
+  // Activate first tab by default
+  if (files.length > 0) {
+    tabsContainer.firstChild.classList.add('active');
+    content.innerHTML = `<p>Download <strong>${files[0]}</strong>: <a href="${files[0]}" download>Click here</a></p>`;
+  }
+</script>
+
+</body>
+</html>
